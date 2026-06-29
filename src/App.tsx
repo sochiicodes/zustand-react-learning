@@ -14,6 +14,20 @@ import { create } from "zustand"
 
 
 function App() {
+
+
+  return (
+    <div className="flex">
+      <Count/>
+    </div>
+  )
+}
+
+export default App
+
+
+
+const Count = () =>{
   const store = useStore()
 
   return (
@@ -24,5 +38,3 @@ function App() {
     </div>
   )
 }
-
-export default App
