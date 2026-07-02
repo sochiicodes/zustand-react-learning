@@ -5,12 +5,13 @@ import { PRODUCTS_DATA } from './lib/mockData'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from './components/ui/button'
 import ChangeQtyButton from './components/ChangeQtyButton'
+import Cart from './components/Cart'
 
 
 
 export default function App() {
-  const store = useStore()
-  const address = useStore((state) => state.address)
+  // const store = useStore()
+  // const address = useStore((state) => state.address)
   // const {age, fullName} = useStore((state) =>({
   //   age: state.age,
   //   fullName: state.fullName
@@ -27,8 +28,14 @@ export default function App() {
 
   return (
     <main className="space-y-2 dark h-screen bg-background max-w-sm mx-auto mt-2">
-      <h1 className="text-2xl">Products: </h1>
+      <Card>
+        <CardHeader className="flex justify-between">
+          <h1 className="text-2xl">Products</h1>
+          <Cart/>
+        </CardHeader>
+      </Card>
       {/* <Count/> */}
+      {/* <Cart/> */}
       <div className="space-y-2 p-4">
         {PRODUCTS_DATA.map((product) =>(
           <Card key={product.id} className="text-white">
