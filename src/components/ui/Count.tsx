@@ -16,7 +16,7 @@ export const Count = () =>{
     const store = useStore()
   
     return (
-      <div className="flex">
+      <div className="flex gap-2">
         <Button onClick={store.inc}> +</Button>
         <p>{store.count}</p>
         <Button onClick={store.dec}> -</Button>
