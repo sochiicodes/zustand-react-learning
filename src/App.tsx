@@ -4,6 +4,7 @@ import { useShallow } from 'zustand/shallow'
 import { PRODUCTS_DATA } from './lib/mockData'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from './components/ui/button'
+import ChangeQtyButton from './components/ChangeQtyButton'
 
 
 
@@ -20,7 +21,8 @@ export default function App() {
   //     address: state.address
   // })))
 
-  
+  const addProduct = useStore((state) => state.addProduct)
+  const cartProducts = useStore((state) => state.products)
 
 
   return (
@@ -35,7 +37,11 @@ export default function App() {
             </CardHeader>
             <CardContent>${product.price}</CardContent>
             <CardFooter>
-              <Button>Add to Cart</Button>
+              {cartProducts.find((item) => item.id === product.id) ? (
+                <ChangeQtyButton productId={product.id}/>
+              ) : (
+                <Button onClick={() => addProduct(product)}>Add to Cart</Button>
+              )}
             </CardFooter>
           </Card>
         ))}

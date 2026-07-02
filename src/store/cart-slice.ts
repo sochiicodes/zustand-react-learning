@@ -32,6 +32,7 @@ export const createCartSlice: StateCreator<CartSlice, [['zustand/immer', never]]
         const foundProduct = state.products.find(
             (product) => product.id === productId
         )
+        console.log("before", foundProduct);
         if(foundProduct){
             foundProduct.qty += 1
         }
