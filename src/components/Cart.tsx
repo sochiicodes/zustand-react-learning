@@ -7,12 +7,13 @@ import { useShallow } from "zustand/shallow";
 import ChangeQtyButton from "./ChangeQtyButton";
 
 export default function Cart() {
-    const {reset, products,removeProduct, total} = useStore(
+    const {reset, products,removeProduct, total, address} = useStore(
         useShallow((state) =>({
             reset: state.reset,
             products: state.products,
             removeProduct: state.removeProduct,
-            total: state.total
+            total: state.total,
+            address: state.address
         }))
     )
     return(
@@ -29,7 +30,7 @@ export default function Cart() {
                         <CircleX/>
                     </Button>
                 </div>
-                <div className="space-y-5 max-h-[72vh] overflow-y-scroll py-5">
+                <div className="space-y-5 max-h-[64vh] overflow-y-scroll py-5">
                     {products.map((product) =>(
                         <Card key={product.id } className="flex flex-col  gap-2">
                             <CardHeader className="flex flex-row items-center justify-between gap-2 ">
@@ -45,7 +46,10 @@ export default function Cart() {
                         </Card>
                     ))}
                 </div>
-                <p>Total: ${total}</p>
+                <CardFooter className="flex flex-col p-4 items-start">
+                    <h2 className="text-lg">Total: ${total}</h2>
+                    <p className="text-xs text-gray-500">Address: {address}</p>
+                </CardFooter>
             </PopoverContent>
         </Popover>
     )

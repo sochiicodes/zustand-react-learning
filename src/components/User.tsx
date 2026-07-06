@@ -7,16 +7,26 @@ import { useShallow } from "zustand/shallow";
 import ChangeQtyButton from "./ChangeQtyButton";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { useEffect } from "react";
 
 export default function User() {
-    const {setAddress,address, fullName, userName} = useStore(
+    const {setAddress,address, fullName, userName, fetchUser} = useStore(
         useShallow((state) =>({
             fullName: state.fullName,
             address: state.address,
             setAddress: state.setAddress,
-            userName: state.userName
+            userName: state.userName,
+            fetchUser: state.fetchUser
         }))
-    )
+    )   
+
+    useEffect(() =>{
+        async function fetchData(){
+            await fetchUser()
+        }
+        fetchData()
+    }, [fetchUser])
+
     return(
         <Popover>
             <PopoverTrigger asChild>
@@ -25,9 +35,11 @@ export default function User() {
                 </Button>
             </PopoverTrigger>
             <PopoverContent className=" space-y-2 ml-55 shadow-lg">
-                <div className="flex gap-2">
-                    <p>{fullName}</p>
-                    <p className="text-sm">{userName}</p>
+                <div>
+                    <div className="flex flex-col">
+                        <p>{fullName}</p>
+                        <p className="text-xs text-gray-500">{userName}</p>
+                    </div>
                 </div>
                 <Label htmlFor="address">Your Address: </Label>
                 <Input 
