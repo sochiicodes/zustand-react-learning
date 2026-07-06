@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from './components/ui/button'
 import ChangeQtyButton from './components/ChangeQtyButton'
 import Cart from './components/Cart'
+import User from './components/User'
 
 
 
@@ -30,6 +31,7 @@ export default function App() {
     <main className="space-y-2 dark h-screen bg-background max-w-sm mx-auto mt-2">
       <Card>
         <CardHeader className="flex justify-between">
+          <User/>
           <h1 className="text-2xl">Products</h1>
           <Cart/>
         </CardHeader>
