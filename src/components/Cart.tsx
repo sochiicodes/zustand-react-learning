@@ -22,14 +22,14 @@ export default function Cart() {
                     <ShoppingCart/>
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className=" space-y-2 mr-55">
+            <PopoverContent className=" space-y-2 mr-55 shadow-lg">
                 <div className="flex gap-2 text-lg items-center">
                     <h1>Cart:</h1> 
                     <Button onClick={reset} variant="destructive" size="icon">
                         <CircleX/>
                     </Button>
                 </div>
-                <div className="space-y-5 max-h-[72vh] overflow-y-scroll shadow-md pt-5">
+                <div className="space-y-5 max-h-[72vh] overflow-y-scroll py-5">
                     {products.map((product) =>(
                         <Card key={product.id } className="flex flex-col  gap-2">
                             <CardHeader className="flex flex-row items-center justify-between gap-2 ">
