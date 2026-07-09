@@ -13,7 +13,7 @@ export const useStore = create<Store>()(
             subscribeWithSelector(immer((...a) => ({
                 ...createUserSlice(...a),
                 ...createCartSlice(...a),
-                ...createTaskSlice,
+                ...createTaskSlice(...a),
                 }))
             ),{
                 name: 'local-storage'

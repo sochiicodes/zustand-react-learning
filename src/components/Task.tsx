@@ -1,16 +1,19 @@
 
 import { useStore } from "@/store/store"
-import { useShallow } from "zustand/shallow"
-import { CardAction } from "./ui/card"
+import type { Task } from "@/store/task-slice"
 
-const STATUS = "ONGOING"
 
-export default function Task({title}: {title: string}){
-    // const {title} = useStore(
-    //     useShallow((state) =>({
-    //         title: state.title
+
+export default function Task({title, state}: Task){
+    // const {task } = useStore(
+    //     useShallow((store) =>({
+    //         task: store.tasks.find((task) => task.title === title),
     //     }))
     // )
+    const task = useStore((store) =>
+        store.tasks.find((task) => task.title === title)
+    )
+
     const statusColor ={
         PLANNED: "bg-green-500",
         ONGOING: "bg-blue-800",
@@ -18,11 +21,10 @@ export default function Task({title}: {title: string}){
     }
     
     return(
-        <section className=" gap-8">
-            <div>{title}</div>
-            <div className="flex justify-between">
-                <div></div>
-                <div className={`${statusColor[STATUS]} flex justify-end text-xs p-1 rounded`}>{STATUS}</div>
+        <section className="p-2 bg-[#0f0f0f] rounded">
+            <div>{task.title}</div>
+            <div className="flex justify-end">
+                <div className={`${statusColor[state]} text-[10px] p-1 rounded`}>{state}</div>
             </div>
         </section>
     )

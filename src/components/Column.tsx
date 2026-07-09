@@ -1,23 +1,45 @@
+import { useStore } from "@/store/store";
 import Task from "./Task";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import type { StateStatus } from "@/store/task-slice";
 
-interface CardProps{
-    title: string
 
+
+
+
+interface ColumnProps{
+    state: StateStatus
 }
-export default function Column({title}: CardProps){
+
+export default function Column({state}: ColumnProps){
+    const allTasks = useStore((store) => store.tasks)
+    const tasks = allTasks.filter((task) => task.state === state)
+
+    // const tasks = useStore(
+    //     useShallow((store) =>
+    //         store.tasks.filter((task) => task.state === state)
+    //     )
+    // )
+    
+
     return(
         <section>
             <Card>
-                <CardHeader>
-                    <CardTitle>{title}</CardTitle>
+                <CardHeader className="flex flex-col">
+                    <CardTitle className="flex w-full justify-between">
+                        {state}
+                        
+                    </CardTitle>
                     <CardDescription>
-                        Card Description
+                        3 tasks remaining
                     </CardDescription>
                 </CardHeader>
-                <CardContent>
-                    {/* <p>Card Content</p> */}
-                    <Task title="Task"/>
+                <CardContent className="flex flex-col gap-2">
+                    {
+                        tasks.map((task) =>(
+                            <Task key={task.title} title={task.title}  state={task.state} id={task.id} />
+                        ))
+                    }
                 </CardContent>
                 <CardFooter>
                     <p>Card Footer</p>
