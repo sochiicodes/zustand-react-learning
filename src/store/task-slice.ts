@@ -14,7 +14,7 @@ export interface TaskState{
 
 
 interface TaskActions{
-    // addTask: (task: Task) => void
+    addTask: (title: string, state: StateStatus) => void
     // removeTask: (taskId: number) => void
 
 }
@@ -30,7 +30,7 @@ const initialState: TaskState = {
     ]
 }
 
-export const createTaskSlice: StateCreator<Store, [['zustand/immer', never]], [], TaskSlice> = () =>({
+export const createTaskSlice: StateCreator<Store, [['zustand/immer', never]], [], TaskSlice> = (set) =>({
     ...initialState,
-
+    addTask: (title, state) => set((store) => ({tasks: [...store.tasks, {title, state}]}))
 })
