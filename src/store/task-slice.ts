@@ -39,3 +39,17 @@ export const createTaskSlice: StateCreator<Store, [['zustand/immer', never]], []
         ))
     }))
 })
+
+// const log = (config) => (set, get, api) =>
+//     config(
+//         (...args) =>{
+//             const current = get()
+//             if(!current){
+//                 //get state from external source
+//             }
+//             console.log(args)
+//             set(...args)
+//         },
+//         get,
+//         api
+//     )
