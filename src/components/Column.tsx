@@ -39,7 +39,10 @@ export default function Column({state}: ColumnProps){
 
     return(
         <section>
-            <Card>
+            <Card 
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => console.log(e)}
+            >
                 <CardHeader className="flex flex-col">
                     <CardTitle className="flex w-full justify-between">
                         {state}
@@ -48,7 +51,10 @@ export default function Column({state}: ColumnProps){
                         </CardAction>
                     </CardTitle>
                     <CardDescription>
-                        {taskLength} {taskLength > 1? "tasks remaining": "task remaining"}
+                        {
+                            taskLength === 0
+                            ? "No task"
+                            : `${taskLength} ${taskLength === 1? "task" : "tasks "} remaining`}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-2">

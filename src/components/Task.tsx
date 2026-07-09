@@ -23,7 +23,7 @@ export default function Task({title, state}: Task){
     }
     
     return(
-        <section className="p-3 bg-[#0f0f0f] rounded space-y-4">
+        <section className="p-3 bg-[#0f0f0f] rounded space-y-4 cursor-move" draggable>
             <div>{task.title}</div>
             <div className="flex justify-between">
                 <Trash2Icon 
