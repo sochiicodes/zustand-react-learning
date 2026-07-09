@@ -10,10 +10,11 @@ export default function Task({title, state}: Task){
     // const task = useStore((store) =>
     //     store.tasks.find((task) => task.title === title)
     // )
-    const {task,deleteTask } = useStore(
+    const {task,deleteTask,setDraggedTask } = useStore(
             useShallow((store) =>({
                 task: store.tasks.find((task) => task.title === title),
-                deleteTask: store.deleteTask
+                deleteTask: store.deleteTask,
+                setDraggedTask: store.setDraggedTask,
             }))
         )
     const statusColor ={
@@ -23,7 +24,11 @@ export default function Task({title, state}: Task){
     }
     
     return(
-        <section className="p-3 bg-[#0f0f0f] rounded space-y-4 cursor-move" draggable>
+        <section 
+            className="p-3 bg-[#0f0f0f] rounded space-y-4 cursor-move" 
+            draggable
+            onDragStart={() => {setDraggedTask(task.title)}}
+        >
             <div>{task.title}</div>
             <div className="flex justify-between">
                 <Trash2Icon 
