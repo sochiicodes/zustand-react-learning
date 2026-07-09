@@ -24,12 +24,7 @@ interface TaskActions{
 export type TaskSlice = TaskState & TaskActions
 
 const initialState: TaskState = {
-    tasks: [
-        {id:  crypto.randomUUID(), title: "Task One", state: "PLANNED"},
-        {id:  crypto.randomUUID(), title: "Task Two", state: "PLANNED"},
-        {id:  crypto.randomUUID(), title: "Task Three", state: "ONGOING"},
-        {id:  crypto.randomUUID(), title: "Task Four", state: "DONE"},
-    ],
+    tasks: [],
     draggedTask: null
 }
 
