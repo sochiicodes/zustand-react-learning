@@ -6,7 +6,6 @@ import { useShallow } from "zustand/shallow";
 import { useState } from "react";
 
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import {Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger} from "./ui/drawer"
 import { Input } from "./ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
@@ -33,8 +32,9 @@ export default function Column({state}: ColumnProps){
             })
         )
     )
-
     const allTasks = tasks.filter((task) => task.state === state)
+    const taskLength = useStore((store) => store.tasks.filter((task) => task.state === state).length)
+
     
 
     return(
@@ -48,21 +48,21 @@ export default function Column({state}: ColumnProps){
                         </CardAction>
                     </CardTitle>
                     <CardDescription>
-                        3 tasks remaining
+                        {taskLength} {taskLength > 1? "tasks remaining": "task remaining"}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-2">
                     {
                         allTasks.map((task) =>(
                             <Task 
-                                key={task.title} 
+                                key={task.id} 
                                 title={task.title}  
                                 state={task.state} id={task.id} 
                             />
                         ))
                     }
                     <Dialog open={open} onOpenChange={setOpen}>
-                        <DialogTrigger>Add Task </DialogTrigger>
+                        {/* <DialogTrigger>Add Task </DialogTrigger> */}
                         <DialogContent className="sm:max-w-[425px]">
                             <DialogHeader>
                                 <DialogTitle>Add Task</DialogTitle>

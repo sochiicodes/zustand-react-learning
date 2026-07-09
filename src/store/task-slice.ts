@@ -4,7 +4,7 @@ import type { StateCreator } from "zustand"
 export type StateStatus = "PLANNED" | "ONGOING" | "DONE"
 
 export interface Task{
-    id: number
+    id: string
     title: string
     state: StateStatus
 }
@@ -15,22 +15,22 @@ export interface TaskState{
 
 interface TaskActions{
     addTask: (title: string, state: StateStatus) => void
-    // removeTask: (taskId: number) => void
-
+    deleteTask: (title: string) => void
 }
 
 export type TaskSlice = TaskState & TaskActions
 
 const initialState: TaskState = {
     tasks: [
-        {id: 1, title: "Task One", state: "PLANNED"},
-        {id: 2, title: "Task Two", state: "PLANNED"},
-        {id: 3, title: "Task Three", state: "ONGOING"},
-        {id: 4, title: "Task Four", state: "DONE"},
+        {id:  crypto.randomUUID(), title: "Task One", state: "PLANNED"},
+        {id:  crypto.randomUUID(), title: "Task Two", state: "PLANNED"},
+        {id:  crypto.randomUUID(), title: "Task Three", state: "ONGOING"},
+        {id:  crypto.randomUUID(), title: "Task Four", state: "DONE"},
     ]
 }
 
 export const createTaskSlice: StateCreator<Store, [['zustand/immer', never]], [], TaskSlice> = (set) =>({
     ...initialState,
-    addTask: (title, state) => set((store) => ({tasks: [...store.tasks, {title, state}]}))
+    addTask: (title, state) => set((store) => ({tasks: [...store.tasks, {title, state}]})),
+    deleteTask: (title) => set((store) => ({tasks: store.tasks.filter((task) => task.title != title)})),
 })
