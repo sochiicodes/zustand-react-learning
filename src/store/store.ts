@@ -9,14 +9,16 @@ import { createTaskSlice } from "./task-slice"
 
 export const useStore = create<Store>()(
     devtools(
-        
+        persist(
             subscribeWithSelector(immer((...a) => ({
                 ...createUserSlice(...a),
                 ...createCartSlice(...a),
                 ...createTaskSlice(...a),
                 }))
-            ),
-        
+            ),{
+                name: 'local-storage'
+            }
+        )
     )
 )
 
