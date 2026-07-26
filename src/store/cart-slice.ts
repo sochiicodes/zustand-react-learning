@@ -1,5 +1,6 @@
 import type { CartProduct } from "@/types/cartProducts"
 import type { Product } from "@/types/products"
+import type { Store } from "@/types/store"
 import type { StateCreator } from "zustand"
 
 interface CartState{
@@ -26,18 +27,18 @@ const initialState: CartState ={
 
 //export const useStore = create((set) =>({}))
 
-export const createCartSlice: StateCreator<CartSlice, [['zustand/immer', never]], [], CartSlice> = (set, get) => ({
+export const createCartSlice: StateCreator<Store, [['zustand/immer', never]], [], CartSlice> = (set, get) => ({
     ...initialState,
-    incQty: (productId) => set((state: CartState) => {
+    incQty: (productId) => set((state) => {
         const foundProduct = state.products.find(
             (product) => product.id === productId
         )
-        console.log("before", foundProduct);
+        
         if(foundProduct){
             foundProduct.qty += 1
         }
     }),
-    decQty: (productId) => set((state: CartState) => {
+    decQty: (productId) => set((state) => {
         const foundIndex = state.products.findIndex((product) => product.id === productId)
 
         if(foundIndex !== -1){

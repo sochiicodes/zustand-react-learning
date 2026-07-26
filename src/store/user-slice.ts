@@ -8,7 +8,7 @@ interface UserState{
     address: string
 }
 
-type UserActions = {
+interface UserActions{
     setAddress: (address: string) => void
     fetchUser: () => Promise<void>
 }

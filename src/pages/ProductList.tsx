@@ -20,6 +20,7 @@ export default function ProductList() {
 
   // const {address} = useStore(
   //   useShallow((state) =>({
+  //     age: state.age,
   //     address: state.address
   // })))
 
